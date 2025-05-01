@@ -1,8 +1,4 @@
-# Splits a large CSV into (potentially) many smaller CSVs, preserving
-# headers. The size of each chunked CSV is determined by the
-# second parameter. Outputs the resulting CSVs to a
-# subdirectory `split/` residing in the directory where this
-# script is invoked.
+# Simple script to prompt ChatGPT from the terminal
 
 # Params: 
 #   $1: The prompt which will be sent to ChatGPT
