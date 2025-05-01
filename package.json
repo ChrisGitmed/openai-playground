@@ -1,0 +1,20 @@
+{
+  "author": "Christopher Gitmed",
+  "dependencies": {
+    "dark-args": "0.0.4",
+    "js-shade": "0.0.5",
+    "openai": "4.96.2"
+  },
+  "description": "A repo to play around with some OpenAI APIs",
+  "homepage": "https://github.com/ChrisGitmed/openai-playground#readme",
+  "license": "ISC",
+  "main": "index.js",
+  "name": "openai-playground",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisGitmed/openai-playground.git"
+  },
+  "scripts": {},
+  "type": "module",
+  "version": "1.0.0"
+}
