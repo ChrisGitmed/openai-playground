@@ -16,10 +16,11 @@ fi
 echo
 echo "Type 'exit' to end the conversation at any time."
 echo "Beginning conversation with ChatGPT (model gpt-4.1)..."
-echo
 while true; do
   # Get user input
-  read -p "You: " USER_MSG
+  echo
+  read -p $'\x1b[32mYou:\x1b[0m ' USER_MSG
+  echo
 
   # If the User types 'exit', exit the chat
   [[ "$USER_MSG" == "exit" ]] && break
@@ -41,8 +42,8 @@ while true; do
   )
 
   # Extract assistant reply
-  ASSISTANT_REPLY=$(echo $RESPONSE | jq -r '.choices[0].message.content')
-  echo "Assistant: $ASSISTANT_REPLY"
+  ASSISTANT_REPLY=$(echo $RESPONSE | jq -Rnr '[inputs] | join("\\n") | fromjson | .choices[0].message.content')
+  echo $'\x1b[33mAssistant:\x1b[0m '"$ASSISTANT_REPLY"
 
   # Append assistant reply to history
   jq \
