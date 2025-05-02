@@ -1,4 +1,5 @@
 # Script to initiate a conversation with ChatGPT from within the terminal.
+# You need to set your OPENAI_API_KEY outside of this script (i.e. `export OPENAI_API_KEY=${your API key}`)
 # Usage: sh chat-gpt.sh
 
 # Set the filepath to the chat history file
