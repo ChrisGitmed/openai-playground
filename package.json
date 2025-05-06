@@ -2,7 +2,6 @@
   "author": "Christopher Gitmed",
   "dependencies": {
     "dark-args": "0.0.4",
-    "eslint": "9.26.0",
     "js-shade": "0.0.5",
     "openai": "4.96.2"
   },
@@ -15,7 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/ChrisGitmed/openai-playground.git"
   },
-  "scripts": {},
+  "scripts": {
+    "dev": "node --env-file=config.env scripts/chat-gpt.js"
+  },
   "type": "module",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "devDependencies": {
+    "eslint": "9.26.0"
+  }
 }
