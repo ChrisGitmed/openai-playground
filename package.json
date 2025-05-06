@@ -2,6 +2,7 @@
   "author": "Christopher Gitmed",
   "dependencies": {
     "dark-args": "0.0.4",
+    "eslint": "9.26.0",
     "js-shade": "0.0.5",
     "openai": "4.96.2"
   },
