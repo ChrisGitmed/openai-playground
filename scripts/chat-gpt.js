@@ -1,22 +1,58 @@
-import OpenAI from "openai";
-import { argv } from "dark-args";
-import { Shade } from "js-shade";
+import OpenAI from 'openai';
+import { Shade } from 'js-shade';
+import { createInterface } from 'readline/promises';
+import {
+  stdin,
+  stdout,
+} from 'process';
 
-const { prompt } = argv
+const io = createInterface({
+  input: stdin,
+  output: stdout,
+});
+
+const chatMessages = [];
+
 const openAi = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-if (!prompt) {
-  console.log('No prompt provided. Exiting script');
-  process.exit(0);
-}
+(async () => {
+  console.log(`\nType ${Shade.red('exit')} to end the conversation at any time`);
+  console.log('Beginning conversation with ChatGPT (model gpt-4.1)...\n');
 
-console.log('Querying ChatGPT (model gpt-4.1)...\n')
-console.log(`Prompt: ${Shade.green(argv.prompt)}\n`)
-const response = await openAi.responses.create({
-  model: "gpt-4.1",
-  input: argv.prompt
-});
+  while (true) {
+    // Get the User input
+    const userInput = await io.question(`${Shade.green('You:')} `);
 
-console.log(Shade.yellow(response.output_text), '\n');
+    // If the User types 'exit', exit the chat
+    if (userInput === 'exit') {
+      console.log('Exiting....');
+      process.exit(0);
+    }
+
+    // Append User message to chat log
+    chatMessages.push({
+      role: 'user',
+      content: userInput,
+    });
+
+    // Send the request to OpenAI
+    const response = await openAi.chat.completions.create({
+      model: 'gpt-4.1',
+      messages: chatMessages,
+    });
+
+    // Extract the reply
+    const reply = response.choices[0].message.content;
+
+    // Log the reply to the console
+    console.log(`${Shade.yellow('\nAssistant: ')} ${reply}\n`);
+
+    // Append the reply to the chat history
+    chatMessages.push({
+      role: 'assistant',
+      content: reply,
+    });
+  }
+})();
