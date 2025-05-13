@@ -6,6 +6,9 @@
     "openai": "4.96.2"
   },
   "description": "A repo to play around with some OpenAI APIs",
+  "devDependencies": {
+    "eslint": "9.26.0"
+  },
   "homepage": "https://github.com/ChrisGitmed/openai-playground#readme",
   "license": "ISC",
   "main": "index.js",
@@ -18,8 +21,5 @@
     "dev": "node --env-file=config.env scripts/chat-gpt.js"
   },
   "type": "module",
-  "version": "1.0.0",
-  "devDependencies": {
-    "eslint": "9.26.0"
-  }
+  "version": "1.0.0"
 }

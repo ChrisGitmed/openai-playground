@@ -13,11 +13,13 @@ const io = createInterface({
 
 const chatMessages = [];
 
+// TODO: Add an option to save the chat
+// TODO: Look into operator integration
+
 const openAi = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// TODO: Enable web search
 (async () => {
   console.log(`\nType ${Shade.red('exit')} to end the conversation at any time`);
   console.log('Beginning conversation with ChatGPT (model gpt-4.1)...\n');
@@ -25,6 +27,7 @@ const openAi = new OpenAI({
   while (true) {
     // Get the User input
     const userInput = await io.question(`${Shade.green('You:')} `);
+    console.log('');
 
     // If the User types 'exit', exit the chat
     if (userInput === 'exit') {
@@ -37,6 +40,14 @@ const openAi = new OpenAI({
       role: 'user',
       content: userInput,
     });
+
+    // Have some animated loader run
+    let i = 0;
+    const spinnerFrames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+    const spinner = setInterval(() => {
+      process.stdout.write(`\r${Shade.cyan(spinnerFrames[i % spinnerFrames.length])} Thinking...`);
+      i += 1;
+    }, 100);
 
     // Send the request to OpenAI
     const response = await openAi.responses.create({
@@ -59,6 +70,10 @@ const openAi = new OpenAI({
     // Extract the reply
     const reply = response.output_text;
 
+    // Clear the loading animation
+    clearInterval(spinner);
+    stdout.write('\x1b[1A'); // Move cursor up
+    stdout.write('\x1b[2K'); // Clear line
 
     // Log the reply to the console
     console.log(`${Shade.yellow('\nAssistant: ')} ${reply}\n`);
@@ -70,4 +85,3 @@ const openAi = new OpenAI({
     });
   }
 })();
-
