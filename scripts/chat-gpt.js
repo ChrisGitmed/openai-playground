@@ -21,7 +21,7 @@ const openAi = new OpenAI({
 });
 
 (async () => {
-  console.log(`\nType ${Shade.red('exit')} to end the conversation at any time`);
+  console.log(`\nType ${Shade.red('exit')} to end the conversation`);
   console.log('Beginning conversation with ChatGPT (model gpt-4.1)...\n');
 
   while (true) {
